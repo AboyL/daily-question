@@ -39,9 +39,6 @@ function reverseBetween(head: ListNode | null, left: number, right: number): Lis
   if (!head) {
     return null
   }
-  if(left===right){
-    return head
-  }
   // 先找到left节点以及left前面的节点 从left开始进行反转 直到right停止反转
   let index = 1
   let leftNode = head
@@ -56,14 +53,15 @@ function reverseBetween(head: ListNode | null, left: number, right: number): Lis
   let next = leftNode.next
   let current = leftNode
   let oldCurrnet = current
-  // debugger
-  while (next && index < right) {
+  // 表示下一个要处理的节点是什么 明确变量定义
+  let nextIndex=index+1
+  while (next && nextIndex <= right) {
     // 保留数据
     oldCurrnet = current
     current = next
     next = next.next
     current.next = oldCurrnet
-    ++index
+    ++nextIndex
   }
   leftNode.next = next
   if (originLeftNode !== leftNode) {
